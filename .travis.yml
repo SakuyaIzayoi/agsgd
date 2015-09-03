@@ -4,8 +4,11 @@ compiler:
   - gcc
   - clang
 
-script:
+before_install:
   - mkdir build
   - cd build
+
+script:
   - cmake ../
   - make
+  - ./Agsgd
