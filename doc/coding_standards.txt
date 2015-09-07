@@ -1,0 +1,12 @@
+Building
+
+1. Building the application will be done with CMake.
+2. All commits that change functionality MUST NOT contain [ci skip].
+3. Stable releases MUST display as passing in TravisCI.
+4. No extraneous includes. "Use what you include"
+
+Formatting
+
+1. Lower snake-case for file names.
+2. Prefer not going past 80 columns in a file.
+3. Allman-style indentation for curly brackets.
