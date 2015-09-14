@@ -122,7 +122,11 @@ void DynamicArray<T>::pushFront( T element )
         d_data = newArray;
     }
         // Push element to front; shift others over.
-        // TODO: IMPLEMENT
+        for ( int i = d_length - 1; i >= 0; i-- )
+        {
+            d_data[i+1] = d_data[i];
+        }
+        d_data[0] = element;
 }
 
 template <class T>
@@ -135,7 +139,15 @@ T DynamicArray<T>::pop()
 template <class T>
 T DynamicArray<T>::popFront()
 {
+    T ret = d_data[0];
 
+    for (int i = 0; i < d_length; i++)
+    {
+        d_data[i] = d_data[i + 1];
+    }
+
+    d_length--;
+    return ret;
 }
 
 template <class T>

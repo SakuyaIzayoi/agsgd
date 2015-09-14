@@ -79,14 +79,39 @@ TEST(DynamicArrayPushTests, OverflowReallocTest)
     ASSERT_TRUE( array->getMaxSize() > 2 );
 }
 
-/*TEST(DynamicArrayGetterTests, SquareBracketTest)
+TEST(DynamicArrayPopTests, PopFrontTest)
 {
     using namespace StevensDev;
 
-    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 8 );
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 4 );
+    int ret = 0;
 
     array->push( 42 );
     array->push( 17 );
+    array->push( 128 );
 
-    ASSERT_TRUE( array[0] == 42 );
-}*/
+    ret = array->popFront();
+
+    ASSERT_TRUE( array->getLength() == 2 );
+    ASSERT_TRUE( ret == 42 );
+}
+
+TEST(DynamicArrayPushTests, PushFrontTest)
+{
+    using namespace StevensDev;
+
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 4 );
+
+    array->push( 42 );
+    array->push( 17 );
+    array->push( 128 );
+
+    array->pushFront( 2 );
+    ASSERT_TRUE( array->at( 1 ) == 2);
+
+    array->pushFront( 256 );
+    ASSERT_TRUE( array->at( 1 ) == 256 );
+
+    array->pushFront( 1024 );
+    ASSERT_TRUE( array->at( 1 ) == 1024 );
+}
