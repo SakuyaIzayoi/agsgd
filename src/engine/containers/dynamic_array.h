@@ -66,7 +66,7 @@ template <class T>
 inline
 DynamicArray<T>::DynamicArray( sgdm::IAllocator<T>* alloc )
 {
-  d_alloc = alloc;
+    d_alloc = alloc;
 } // Initial allocator Constructor
 
 // DESTRUCTOR

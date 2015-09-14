@@ -136,7 +136,7 @@ void CountingAllocator<T>::release( T* ptr, int count )
     d_totalReleaseCount += count;
     d_outstandingCount = d_allocationCount - d_releaseCount;
     d_totalOutstandingCount = d_totalAllocationCount - d_totalReleaseCount;
-    delete[] (ptr);
+    delete[] ptr;
 }
 
 } // End sgdm namespace.

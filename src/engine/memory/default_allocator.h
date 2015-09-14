@@ -68,7 +68,7 @@ template <class T>
 inline
 void DefaultAllocator<T>::release( T* ptr, int count )
 {
-  delete[] (ptr);
+  delete[] ptr;
 }
 
 } // End sgdm namespace.
