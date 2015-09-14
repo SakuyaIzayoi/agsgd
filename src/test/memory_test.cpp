@@ -26,3 +26,28 @@ TEST(CountingAllocatorConstructorsTest, CopyConstructor)
 
   ASSERT_TRUE(b == a);
 }
+
+TEST(CountingAllocatorTrackingTest, AllocationCounting)
+{
+    using namespace StevensDev;
+
+    int *a, *b;
+
+    sgdm::CountingAllocator<int> *alloc;
+    alloc = new sgdm::CountingAllocator<int>;
+
+    a = alloc->get( 4 );
+    b = alloc->get( 4 );
+
+    ASSERT_TRUE( alloc->getAllocationCount() == 2 );
+    ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalAllocationCount() == 2 );
+
+    alloc->release( a, 1 );
+
+    ASSERT_TRUE( alloc->getReleaseCount() == 1 );
+    ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalReleaseCount() == 1 );
+    ASSERT_TRUE( alloc->getOutstandingCount() == 1 );
+    ASSERT_TRUE(
+        sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 1
+    );
+}

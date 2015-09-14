@@ -118,23 +118,23 @@ template <class T>
 inline
 int CountingAllocator<T>::getTotalOutstandingCount()
 {
-  return d_totalAllocationCount;
+  return d_totalOutstandingCount;
 }
 
 template <class T>
 T* CountingAllocator<T>::get( int count )
 {
-    d_allocationCount += count;
-    d_totalAllocationCount += count;
+    d_allocationCount++;
+    d_totalAllocationCount++;
     return new T[count];
 }
 
 template <class T>
 void CountingAllocator<T>::release( T* ptr, int count )
 {
-    d_releaseCount += count;
-    d_totalReleaseCount += count;
+    d_releaseCount++;
     d_outstandingCount = d_allocationCount - d_releaseCount;
+    d_totalReleaseCount++;
     d_totalOutstandingCount = d_totalAllocationCount - d_totalReleaseCount;
     delete[] ptr;
 }
