@@ -69,6 +69,14 @@ DynamicArray<T>::DynamicArray( sgdm::IAllocator<T>* alloc )
   d_alloc = alloc;
 } // Initial allocator Constructor
 
+// DESTRUCTOR
+template <class T>
+inline
+DynamicArray<T>::~DynamicArray<T>()
+{
+    delete[] d_data;
+}
+
 // MEMBER FUNCTIONS
 template <class T>
 inline
