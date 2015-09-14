@@ -3,13 +3,13 @@
 #define INCLUDED_DYNAMICARRAY
 
 #include <counting_allocator.h>
+#include <stdexcept>
 
 namespace StevensDev
 {
 
 namespace sgdc
 {
-
 template <class T>
 class DynamicArray
 {
@@ -37,6 +37,7 @@ class DynamicArray
     unsigned int const getLength();
     unsigned int const getMaxSize();
     const T at( unsigned int index );
+    T operator []( int i );
     T removeAt( unsigned int index );
     T insertAt( unsigned int index );
 };
@@ -88,10 +89,62 @@ void DynamicArray<T>::push( const T& element )
 {
     if ( d_length >= d_maxSize )
     {
-      // Reallocate array and grow.
-    } else {
-        d_data[d_length++] = element;
+        // Reallocate array and grow.
+        d_maxSize += 32;
+        T *newArray = new T[d_maxSize];
+
+        memcpy( newArray, d_data, sizeof(T) * d_maxSize );
+
+        d_data = newArray;
     }
+    d_data[d_length++] = element; // Push element to back.
+}
+
+template <class T>
+void DynamicArray<T>::pushFront( T element )
+{
+    if ( d_length >= d_maxSize )
+    {
+        // Reallocate array and grow.
+        d_maxSize += 32;
+        T *newArray = new T[d_maxSize];
+
+        memcpy( newArray, d_data, sizeof(T) * d_maxSize );
+
+        d_data = newArray;
+    }
+        // Push element to front; shift others over.
+        // TODO: IMPLEMENT
+}
+
+template <class T>
+T DynamicArray<T>::pop()
+{
+    T ret = d_data[--d_length];
+    return ret;
+}
+
+template <class T>
+T DynamicArray<T>::popFront()
+{
+
+}
+
+template <class T>
+const T DynamicArray<T>::at( unsigned int index )
+{
+    if ( index > d_length )
+    {
+        throw(std::out_of_range("Array out of bounds"));
+    }
+    return d_data[index - 1];
+}
+
+template <class T>
+inline
+T DynamicArray<T>::operator[]( int i )
+{
+    return d_data[i];
 }
 
 } // End sgdc namespace.

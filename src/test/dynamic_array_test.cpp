@@ -1,6 +1,7 @@
 // dynamic_array_test.cpp
 #include <dynamic_array.h>
 #include "test.h"
+#include <stdexcept>
 
 TEST(DynamicArrayConstructorTests, DefaultConstructor)
 {
@@ -40,3 +41,52 @@ TEST(DynamicArrayPushTests, PushTest)
     ASSERT_TRUE( array->getLength() == 3 );
     ASSERT_TRUE( array->getMaxSize() == 8 );
 }
+
+TEST(DynamicArrayGetterTests, AtThrowsTest)
+{
+    using namespace StevensDev;
+
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 8 );
+
+    ASSERT_THROW(array->at( 12345 );, std::out_of_range);
+}
+
+TEST(DynamicArrayGetterTests, AtTest)
+{
+    using namespace StevensDev;
+
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 8 );
+
+    array->push( 42 );
+    array->push( 17 );
+
+    ASSERT_TRUE( array->at( 1 ) == 42);
+    ASSERT_TRUE( array->at( 2 ) == 17);
+}
+
+TEST(DynamicArrayPushTests, OverflowReallocTest)
+{
+    using namespace StevensDev;
+
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 2 );
+
+    ASSERT_TRUE( array->getMaxSize() == 2 );
+
+    array->push( 42 );
+    array->push( 17 );
+    array->push( 128 ); // Overflow possible space
+
+    ASSERT_TRUE( array->getMaxSize() > 2 );
+}
+
+/*TEST(DynamicArrayGetterTests, SquareBracketTest)
+{
+    using namespace StevensDev;
+
+    sgdc::DynamicArray<int> *array = new sgdc::DynamicArray<int>( 8 );
+
+    array->push( 42 );
+    array->push( 17 );
+
+    ASSERT_TRUE( array[0] == 42 );
+}*/

@@ -16,7 +16,7 @@ class IAllocator
   public:
     // MEMBER FUNCTIONS
     virtual T* get( int count ) = 0;
-    virtual void release ( T*, int count ) = 0;
+    virtual void release ( T* address, int count ) = 0;
 };
 
 }

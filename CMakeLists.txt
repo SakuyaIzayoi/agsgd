@@ -7,6 +7,8 @@ set(Agsgd_VERSION_MINOR 1)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
+SET(CMAKE_CXX_FLAGS "-std=c++0x")
+
 FILE(GLOB MEM_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/memory/*.cpp)
 FILE(GLOB CONTAINERS_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/containers/*.cpp)
 
@@ -17,7 +19,7 @@ include_directories($(PROJECT_SOURCE_DIR)/src)
 include_directories($(PROJECT_SOURCE_DIR)/src/engine/memory)
 include_directories($(PROJECT_SOURCE_DIR)/src/engine/containers)
 
-add_executable (Agsgd game.m.cpp)
+add_executable(engine game.m.cpp)
 add_executable(agsgd_test ${TEST_MAIN} ${MEM_SRCFILES} ${CONTAINERS_SRCFILES})
 
 target_link_libraries(agsgd_test ${GTEST_BOTH_LIBRARIES})
