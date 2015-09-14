@@ -48,6 +48,5 @@ TEST(CountingAllocatorTrackingTest, AllocationCounting)
     ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalReleaseCount() == 1 );
     ASSERT_TRUE( alloc->getOutstandingCount() == 1 );
     ASSERT_TRUE(
-        sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 1
-    );
+        sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 1 );
 }
