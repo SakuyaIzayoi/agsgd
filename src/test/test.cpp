@@ -2,6 +2,8 @@
 #include "test.h"
 #include <gtest/gtest.h>
 
+#include "memory_test.cpp"
+
 TEST(EntityConstructorTest, DefaultConstructor)
 {
   StevensDev::Entity e = StevensDev::Entity();
