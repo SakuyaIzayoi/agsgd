@@ -39,7 +39,7 @@ class DynamicArray
     const T at( unsigned int index );
     T operator []( int i );
     T removeAt( unsigned int index );
-    T insertAt( unsigned int index );
+    void insertAt( unsigned int index , const T& element);
 };
 
 // CONSTRUCTORS
@@ -77,6 +77,14 @@ DynamicArray<T>::~DynamicArray<T>()
     delete[] d_data;
 }
 
+// FREE OPERATORS
+template <class T>
+inline
+std::ostream& operator<<( std::ostream& stream, const DynamicArray<T>& array )
+{
+    return stream << "{ d_length: " << array.getLength() << ", d_maxSize: "
+        << array.getMaxSize() << " }";
+}
 // MEMBER FUNCTIONS
 template <class T>
 inline
@@ -84,6 +92,7 @@ unsigned int const DynamicArray<T>::getLength()
 {
     return d_length;
 }
+// Returns current length of array.
 
 template <class T>
 inline
@@ -91,6 +100,7 @@ unsigned int const DynamicArray<T>::getMaxSize()
 {
     return d_maxSize;
 }
+// Returns maximum allocated size of array.
 
 template <class T>
 void DynamicArray<T>::push( const T& element )
@@ -107,6 +117,7 @@ void DynamicArray<T>::push( const T& element )
     }
     d_data[d_length++] = element; // Push element to back.
 }
+// Pushes item to end of list.
 
 template <class T>
 void DynamicArray<T>::pushFront( T element )
@@ -128,6 +139,7 @@ void DynamicArray<T>::pushFront( T element )
         }
         d_data[0] = element;
 }
+// Push to front of array and grow array if necessary.
 
 template <class T>
 T DynamicArray<T>::pop()
@@ -135,6 +147,7 @@ T DynamicArray<T>::pop()
     T ret = d_data[--d_length];
     return ret;
 }
+// Pop last element from array and return it.
 
 template <class T>
 T DynamicArray<T>::popFront()
@@ -149,6 +162,7 @@ T DynamicArray<T>::popFront()
     d_length--;
     return ret;
 }
+// Pop first element in array and return it.
 
 template <class T>
 const T DynamicArray<T>::at( unsigned int index )
@@ -157,8 +171,10 @@ const T DynamicArray<T>::at( unsigned int index )
     {
         throw(std::out_of_range("Array out of bounds"));
     }
-    return d_data[index - 1];
+    return d_data[index];
 }
+// Return element at position. Throws out of bounds exception if trying to
+// access beyond array bounds.
 
 template <class T>
 inline
@@ -166,6 +182,43 @@ T DynamicArray<T>::operator[]( int i )
 {
     return d_data[i];
 }
+// Square bracket operator.
+
+template <class T>
+T DynamicArray<T>::removeAt( unsigned int index )
+{
+    T ret = d_data[index];
+    for ( int i = index; i <= d_length; i++ )
+    {
+        d_data[i] = d_data[i+1];
+    }
+    d_length--;
+    return ret;
+}
+// Remove element from specified index.
+
+template <class T>
+void DynamicArray<T>::insertAt( unsigned int index, const T& element )
+{
+    if ( d_length >= d_maxSize )
+    {
+        // Reallocate array and grow.
+        d_maxSize += 32;
+        T *newArray = new T[d_maxSize];
+
+        memcpy( newArray, d_data, sizeof(T) * d_maxSize );
+
+        d_data = newArray;
+    }
+
+    for ( int i = d_length - 1; i >= 0; i-- )
+    {
+        d_data[i+1] = d_data[i];
+    }
+    d_data[index] = element;
+    d_length++;
+}
+// Insert element at specified array index.
 
 } // End sgdc namespace.
 

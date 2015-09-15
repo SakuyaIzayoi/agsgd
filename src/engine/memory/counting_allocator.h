@@ -5,6 +5,13 @@
 #include "default_allocator.h"
 #include <iostream>
 
+// COUNTING ALLOCATOR
+// The chosen memory allocation algorithm was a sort of preallocation. It would
+// be poor performance to allocate a new unit of storage every time the array
+// wanted to expand, so it will preallocate 32 extra units of sizeof(T). A more
+// natural implementation would use a named constant in a global header for a
+// project-wide preallocation context.
+
 namespace StevensDev
 {
 
@@ -41,6 +48,7 @@ class CountingAllocator : public DefaultAllocator<T>
     void release( T* ptr, int count );
 };
 
+// STATIC INSTANTIATIONS
 template <class T>
 int CountingAllocator<T>::d_totalAllocationCount = 0;
 
