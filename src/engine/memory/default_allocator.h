@@ -43,11 +43,11 @@ DefaultAllocator<T>::DefaultAllocator( DefaultAllocator& a )
 template <class T>
 DefaultAllocator<T>& DefaultAllocator<T>::operator=( const DefaultAllocator& a )
 {
-  if (this == &a)
-  {
+    if (this == &a)
+    {
+      return *this;
+    }
     return *this;
-  }
-  return *this;
 }
 
 template <class T>
@@ -61,14 +61,14 @@ template <class T>
 inline
 T* DefaultAllocator<T>::get( int count )
 {
-  return new T[count];
+    return new T[count];
 }
 
 template <class T>
 inline
 void DefaultAllocator<T>::release( T* ptr, int count )
 {
-  delete[] ptr;
+    delete[] ptr;
 }
 
 } // End sgdm namespace.
