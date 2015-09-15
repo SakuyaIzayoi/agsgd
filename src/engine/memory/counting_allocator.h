@@ -40,9 +40,9 @@ class CountingAllocator : public DefaultAllocator<T>
     int getReleaseCount() const;
     int getOutstandingCount() const;
 
-    static int getTotalAllocationCount();
-    static int getTotalReleaseCount();
-    static int getTotalOutstandingCount();
+    static int getTotalAllocationCount() const;
+    static int getTotalReleaseCount() const;
+    static int getTotalOutstandingCount() const;
     // MEMBER FUNCTIONS
     T* get( int count );
     void release( T* ptr, int count );
@@ -110,21 +110,21 @@ int CountingAllocator<T>::getOutstandingCount() const
 
 template <class T>
 inline
-int CountingAllocator<T>::getTotalAllocationCount()
+int CountingAllocator<T>::getTotalAllocationCount() const
 {
   return d_totalAllocationCount;
 }
 
 template <class T>
 inline
-int CountingAllocator<T>::getTotalReleaseCount()
+int CountingAllocator<T>::getTotalReleaseCount() const
 {
   return d_totalReleaseCount;
 }
 
 template <class T>
 inline
-int CountingAllocator<T>::getTotalOutstandingCount()
+int CountingAllocator<T>::getTotalOutstandingCount() const
 {
   return d_totalOutstandingCount;
 }

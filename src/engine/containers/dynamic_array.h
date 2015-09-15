@@ -34,9 +34,9 @@ class DynamicArray
     void pushFront( T element );
     T pop();
     T popFront();
-    unsigned int const getLength();
-    unsigned int const getMaxSize();
-    const T at( unsigned int index );
+    unsigned int const getLength() const;
+    unsigned int const getMaxSize() const;
+    const T at( unsigned int index ) const;
     T operator []( int i );
     T removeAt( unsigned int index );
     void insertAt( unsigned int index , const T& element);
@@ -88,7 +88,7 @@ std::ostream& operator<<( std::ostream& stream, const DynamicArray<T>& array )
 // MEMBER FUNCTIONS
 template <class T>
 inline
-unsigned int const DynamicArray<T>::getLength()
+unsigned int const DynamicArray<T>::getLength() const
 {
     return d_length;
 }
@@ -96,7 +96,7 @@ unsigned int const DynamicArray<T>::getLength()
 
 template <class T>
 inline
-unsigned int const DynamicArray<T>::getMaxSize()
+unsigned int const DynamicArray<T>::getMaxSize() const
 {
     return d_maxSize;
 }
@@ -165,7 +165,7 @@ T DynamicArray<T>::popFront()
 // Pop first element in array and return it.
 
 template <class T>
-const T DynamicArray<T>::at( unsigned int index )
+const T DynamicArray<T>::at( unsigned int index ) const
 {
     if ( index > d_length )
     {
