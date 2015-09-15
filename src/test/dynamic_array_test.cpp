@@ -1,7 +1,7 @@
 // dynamic_array_test.cpp
 #include <dynamic_array.h>
-#include "test.h"
 #include <stdexcept>
+#include "test.h"
 
 TEST(DynamicArrayConstructorTests, DefaultConstructor)
 {
