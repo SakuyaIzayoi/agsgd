@@ -57,3 +57,40 @@ TEST(CountingAllocatorTrackingTest, AllocationCounting)
     ASSERT_TRUE(
         sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 0 );
 }
+
+TEST(DefaultAllocatorTest, Constructing)
+{
+    using namespace StevensDev;
+
+    std::string *strings = new std::string[5];
+
+    strings[0] = "Zero";
+    strings[1] = "One";
+    strings[2] = "Two";
+    strings[3] = "Three";
+    strings[4] = "Four";
+
+    std::string *memory;
+
+    sgdm::CountingAllocator<std::string> *alloc;
+    alloc = new sgdm::CountingAllocator<std::string>;
+
+    memory = alloc->get( 5 );
+    for ( int i = 0; i < 5; i++ )
+    {
+        alloc->construct( &memory[i], strings[i] );
+    }
+
+    for ( int i = 0; i < 5; i++ )
+    {
+        ASSERT_TRUE(!memory[i].compare(strings[i]));
+    }
+
+    for ( int i = 0; i < 5; i++ )
+    {
+        alloc->destruct( &memory[i] );
+    }
+
+    alloc->release(memory, 5 );
+
+}

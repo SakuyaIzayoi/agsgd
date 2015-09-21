@@ -4,6 +4,7 @@
 
 #include "iallocator.h"
 #include <iostream>
+#include <memory>
 
 namespace StevensDev
 {
@@ -26,6 +27,9 @@ class DefaultAllocator : public IAllocator<T>
     // MEMBER FUNCTIONS
     T* get( int count );
     void release( T* ptr, int count );
+    void construct( T* pointer, const T& copy );
+    void construct( T* pointer, T&& copy );
+    void destruct( T* pointer );
 };
 
 template <class T>
@@ -70,6 +74,24 @@ inline
 void DefaultAllocator<T>::release( T* ptr, int count )
 {
     delete[] ptr;
+}
+
+template <class T>
+void DefaultAllocator<T>::construct( T* pointer, const T& copy )
+{
+    *pointer = T(copy);
+}
+
+/*template <class T>
+void DefaultAllocator<T>::construct( T* pointer, T&& copy )
+{
+    pointer = std::unique_ptr<T>(new T(copy));
+}*/
+
+template <class T>
+void DefaultAllocator<T>::destruct( T* pointer )
+{
+    pointer->~T();
 }
 
 } // End sgdm namespace.

@@ -17,6 +17,9 @@ class IAllocator
     // MEMBER FUNCTIONS
     virtual T* get( int count ) = 0;
     virtual void release ( T* address, int count ) = 0;
+    virtual void construct( T* pointer, const T& copy ) = 0;
+    //virtual void construct( T* pointer, T&& copy ) = 0;
+    virtual void destruct( T* pointer ) = 0;
 };
 
 }
