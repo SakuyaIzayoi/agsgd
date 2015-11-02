@@ -11,6 +11,7 @@ SET(CMAKE_CXX_FLAGS "-std=c++0x")
 
 FILE(GLOB MEM_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/memory/*.cpp)
 FILE(GLOB CONTAINERS_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/containers/*.cpp)
+FILE(GLOB SCENE_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/scene)
 
 FILE(GLOB TEST_MAIN ${PROJECT_SOURCE_DIR}/src/test/test.cpp)
 
@@ -18,6 +19,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 include_directories($(PROJECT_SOURCE_DIR)/src)
 include_directories($(PROJECT_SOURCE_DIR)/src/engine/memory)
 include_directories($(PROJECT_SOURCE_DIR)/src/engine/containers)
+include_directories($(PROJECT_SOURCE_DIR)/src/engine/scene)
 
 add_executable(engine game.m.cpp)
 add_executable(agsgd_test ${TEST_MAIN} ${MEM_SRCFILES} ${CONTAINERS_SRCFILES})
