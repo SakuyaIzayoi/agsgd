@@ -7,7 +7,9 @@ set(Agsgd_VERSION_MINOR 1)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
-SET(CMAKE_CXX_FLAGS "-std=c++0x")
+SET(CMAKE_CSS_COMPILER "clang++")
+
+SET(CMAKE_CXX_FLAGS "-std=c++0x -fsanitize=address")
 
 FILE(GLOB MEM_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/memory/*.cpp)
 FILE(GLOB CONTAINERS_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/containers/*.cpp)
