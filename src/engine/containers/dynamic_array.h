@@ -111,7 +111,7 @@ void DynamicArray<T>::push( const T& element )
         d_maxSize += 32;
         T *newArray = new T[d_maxSize];
 
-        memcpy( newArray, d_data, sizeof(T) * d_maxSize );
+        memcpy( newArray, d_data, sizeof(T) * (d_maxSize - 32));
 
         d_data = newArray;
     }
@@ -128,7 +128,7 @@ void DynamicArray<T>::pushFront( T element )
         d_maxSize += 32;
         T *newArray = new T[d_maxSize];
 
-        memcpy( newArray, d_data, sizeof(T) * d_maxSize );
+        memcpy( newArray, d_data, sizeof(T) * (d_maxSize - 32));
 
         d_data = newArray;
     }
@@ -188,7 +188,7 @@ template <class T>
 T DynamicArray<T>::removeAt( unsigned int index )
 {
     T ret = d_data[index];
-    for ( int i = index; i <= d_length; i++ )
+    for ( int i = index; i < d_length-1; i++ )
     {
         d_data[i] = d_data[i+1];
     }

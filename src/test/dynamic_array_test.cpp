@@ -78,6 +78,7 @@ TEST(DynamicArrayPushTests, OverflowReallocTest)
     array->push( 128 ); // Overflow possible space
 
     ASSERT_TRUE( array->getMaxSize() > 2 );
+	ASSERT_TRUE( array->at( 2 ) == 128 );
 }
 
 TEST(DynamicArrayPopTests, PopFrontTest)
@@ -141,8 +142,11 @@ TEST(DynamicArrayPushTests, removeAtTest)
     array->push( 42 );
     array->push( 17 );
     array->push( 128 );
+	array->push( 64 );
 
-    array->removeAt( 0 );
+    array->removeAt( 1 );
 
-    ASSERT_TRUE( array->at( 0 ) == 17 );
+	ASSERT_TRUE( array->at( 0 ) == 42 );
+    ASSERT_TRUE( array->at( 1 ) == 128 );
+	ASSERT_TRUE( array->at( 2 ) == 64 );
 }
