@@ -4,6 +4,7 @@ if [[ $CC == "gcc" ]] ; then
 	sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
 	sudo apt-get update -qq
 	sudo apt-get install gcc-4.8 -y -qq
+	export CXX="g++-4.8" CC="gcc-4.8"
 fi
 
 sudo add-apt-repository -y ppa:george-edison55/precise-backports
