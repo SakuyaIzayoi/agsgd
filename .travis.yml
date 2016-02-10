@@ -4,7 +4,7 @@ sudo: true
 
 compiler:
   - gcc
-  - clang
+# - clang
 
 install: ./travis-dependencies.sh
 
