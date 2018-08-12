@@ -4,27 +4,31 @@
 
 TEST(CountingAllocatorConstructorsTest, DefaultConstructor)
 {
-  using namespace StevensDev;
+    using namespace StevensDev;
 
-  sgdm::CountingAllocator<int> *a;
-  a = new sgdm::CountingAllocator<int>;
+    sgdm::CountingAllocator<int> *a;
+    a = new sgdm::CountingAllocator<int>;
 
-  ASSERT_TRUE(a != 0);
-  ASSERT_TRUE(a->getAllocationCount() == 0);
-  ASSERT_TRUE(a->getReleaseCount() == 0);
-  ASSERT_TRUE(a->getOutstandingCount() == 0);
+    ASSERT_TRUE(a != 0);
+    ASSERT_TRUE(a->getAllocationCount() == 0);
+    ASSERT_TRUE(a->getReleaseCount() == 0);
+    ASSERT_TRUE(a->getOutstandingCount() == 0);
+
+    delete a;
 }
 
 TEST(CountingAllocatorConstructorsTest, CopyConstructor)
 {
-  using namespace StevensDev;
+    using namespace StevensDev;
 
-  sgdm::CountingAllocator<int> *a;
-  sgdm::CountingAllocator<int> *b;
-  a = new sgdm::CountingAllocator<int>;
-  b = a;
+    sgdm::CountingAllocator<int> *a;
+    sgdm::CountingAllocator<int> *b;
+    a = new sgdm::CountingAllocator<int>;
+    b = a;
 
-  ASSERT_TRUE(b == a);
+    ASSERT_TRUE(b == a);
+
+    delete a;
 }
 
 TEST(CountingAllocatorTrackingTest, AllocationCounting)
@@ -47,15 +51,15 @@ TEST(CountingAllocatorTrackingTest, AllocationCounting)
     ASSERT_TRUE( alloc->getReleaseCount() == 1 );
     ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalReleaseCount() == 1 );
     ASSERT_TRUE( alloc->getOutstandingCount() == 1 );
-    ASSERT_TRUE(
-        sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 1 );
+    ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 1 );
 
     alloc->release( b, 1 );
     ASSERT_TRUE( alloc->getReleaseCount() == 2 );
     ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalReleaseCount() == 2 );
     ASSERT_TRUE( alloc->getOutstandingCount() == 0 );
-    ASSERT_TRUE(
-        sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 0 );
+    ASSERT_TRUE( sgdm::CountingAllocator<int>::getTotalOutstandingCount() == 0 );
+
+    delete alloc;
 }
 
 TEST(DefaultAllocatorTest, Constructing)
@@ -93,4 +97,6 @@ TEST(DefaultAllocatorTest, Constructing)
 
     alloc->release(memory, 5 );
 
+    delete []strings;
+    delete alloc;
 }

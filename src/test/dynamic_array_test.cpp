@@ -13,6 +13,8 @@ TEST(DynamicArrayConstructorTests, DefaultConstructor)
     ASSERT_TRUE( array != 0 );
     ASSERT_TRUE( array->getLength() == 0 );
     ASSERT_TRUE( array->getMaxSize() == 16 );
+
+    delete array;
 }
 
 TEST(DynamicArrayConstructorTests, InitialSizeConstructor)
@@ -25,6 +27,8 @@ TEST(DynamicArrayConstructorTests, InitialSizeConstructor)
     ASSERT_TRUE( array != 0 );
     ASSERT_TRUE( array->getLength() == 0 );
     ASSERT_TRUE( array->getMaxSize() == 64 );
+
+    delete array;
 }
 
 TEST(DynamicArrayPushTests, PushTest)
@@ -40,6 +44,8 @@ TEST(DynamicArrayPushTests, PushTest)
     ASSERT_TRUE( array != 0 );
     ASSERT_TRUE( array->getLength() == 3 );
     ASSERT_TRUE( array->getMaxSize() == 8 );
+
+    delete array;
 }
 
 TEST(DynamicArrayGetterTests, AtThrowsTest)
@@ -50,6 +56,8 @@ TEST(DynamicArrayGetterTests, AtThrowsTest)
 
     ASSERT_THROW(array->at( 12345 );, std::out_of_range);
     ASSERT_THROW(array->at( -1 );, std::out_of_range);
+
+    delete array;
 }
 
 TEST(DynamicArrayGetterTests, AtTest)
@@ -63,6 +71,8 @@ TEST(DynamicArrayGetterTests, AtTest)
 
     ASSERT_TRUE( array->at( 0 ) == 42);
     ASSERT_TRUE( array->at( 1 ) == 17);
+
+    delete array;
 }
 
 TEST(DynamicArrayPushTests, OverflowReallocTest)
@@ -78,7 +88,9 @@ TEST(DynamicArrayPushTests, OverflowReallocTest)
     array->push( 128 ); // Overflow possible space
 
     ASSERT_TRUE( array->getMaxSize() > 2 );
-	ASSERT_TRUE( array->at( 2 ) == 128 );
+    ASSERT_TRUE( array->at( 2 ) == 128 );
+
+    delete array;
 }
 
 TEST(DynamicArrayPopTests, PopFrontTest)
@@ -96,6 +108,8 @@ TEST(DynamicArrayPopTests, PopFrontTest)
 
     ASSERT_TRUE( array->getLength() == 2 );
     ASSERT_TRUE( ret == 42 );
+
+    delete array;
 }
 
 TEST(DynamicArrayPushTests, PushFrontTest)
@@ -116,6 +130,8 @@ TEST(DynamicArrayPushTests, PushFrontTest)
 
     array->pushFront( 1024 );
     ASSERT_TRUE( array->at( 0 ) == 1024 );
+
+    delete array;
 }
 
 TEST(DynamicArrayPushTests, insertAtTest)
@@ -131,6 +147,8 @@ TEST(DynamicArrayPushTests, insertAtTest)
     array->insertAt( 0, 777);
 
     ASSERT_TRUE( array->at( 0 ) == 777 );
+
+    delete array;
 }
 
 TEST(DynamicArrayPushTests, removeAtTest)
@@ -142,11 +160,13 @@ TEST(DynamicArrayPushTests, removeAtTest)
     array->push( 42 );
     array->push( 17 );
     array->push( 128 );
-	array->push( 64 );
+    array->push( 64 );
 
     array->removeAt( 1 );
 
-	ASSERT_TRUE( array->at( 0 ) == 42 );
+    ASSERT_TRUE( array->at( 0 ) == 42 );
     ASSERT_TRUE( array->at( 1 ) == 128 );
-	ASSERT_TRUE( array->at( 2 ) == 64 );
+    ASSERT_TRUE( array->at( 2 ) == 64 );
+
+    delete array;
 }

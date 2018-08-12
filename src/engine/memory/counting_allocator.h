@@ -66,6 +66,13 @@ CountingAllocator<T>::CountingAllocator() : d_allocationCount( 0 ),
 {
 }
 
+// DESTRUCTORS
+template <class T>
+inline
+CountingAllocator<T>::~CountingAllocator()
+{
+}
+
 template <class T>
 inline
 CountingAllocator<T>::CountingAllocator( const CountingAllocator<T> &a ) :

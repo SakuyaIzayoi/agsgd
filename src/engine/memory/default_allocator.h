@@ -56,6 +56,12 @@ DefaultAllocator<T>& DefaultAllocator<T>::operator=( const DefaultAllocator& a )
 
 template <class T>
 inline
+DefaultAllocator<T>::~DefaultAllocator()
+{
+}
+
+template <class T>
+inline
 std::ostream& operator<<( std::ostream& stream,
     const DefaultAllocator<T>& allocator )
 {

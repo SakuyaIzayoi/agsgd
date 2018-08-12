@@ -75,6 +75,7 @@ inline
 DynamicArray<T>::~DynamicArray<T>()
 {
     delete[] d_data;
+    delete d_alloc;
 }
 
 // FREE OPERATORS
@@ -113,6 +114,7 @@ void DynamicArray<T>::push( const T& element )
 
         memcpy( newArray, d_data, sizeof(T) * (d_maxSize - 32));
 
+        delete []d_data;
         d_data = newArray;
     }
     d_data[d_length++] = element; // Push element to back.
