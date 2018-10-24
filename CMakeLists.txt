@@ -1,12 +1,14 @@
 cmake_minimum_required (VERSION 2.8)
+
+SET(CMAKE_CXX_COMPILER /usr/bin/clang++)
+SET(CMAKE_C_COMPILER /usr/bin/clang)
+
 project (Agsgd)
 
 set(Agsgd_VERSION_MAJOR 0)
 set(Agsgd_VERSION_MINOR 1)
 
 find_package(Threads REQUIRED)
-
-SET(CMAKE_CSS_COMPILER "clang++")
 
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 
