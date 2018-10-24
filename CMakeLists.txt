@@ -35,7 +35,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 	include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-SET(CMAKE_CXX_FLAGS "-std=c++0x -fsanitize=address")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -fsanitize=address")
 
 FILE(GLOB MEM_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/memory/*.cpp)
 FILE(GLOB CONTAINERS_SRCFILES ${PROJECT_SOURCE_DIR}/src/engine/containers/*.cpp)
