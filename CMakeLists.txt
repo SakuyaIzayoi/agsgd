@@ -4,6 +4,7 @@ SET(CMAKE_CXX_COMPILER g++)
 SET(CMAKE_C_COMPILER gcc)
 
 project (Agsgd)
+include(CTest)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -55,4 +56,6 @@ add_executable(agsgd_test ${TEST_MAIN} ${MEM_SRCFILES} ${CONTAINERS_SRCFILES})
 
 target_link_libraries(agsgd_test gtest_main)
 target_link_libraries(agsgd_test "${CMAKE_THREAD_LIBS_INIT}")
+
+add_test(NAME GoogleTest COMMAND agsgd_test)
 
